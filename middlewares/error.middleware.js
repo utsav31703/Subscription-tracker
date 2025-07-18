@@ -22,9 +22,9 @@ const errorMiddleware=(err,req,res,next)=>{
             error=new Error(message.join(', '))
             error.statusCode=400
         }
-        res.statusCode(error.statusCode || 500).json({success:false,error:error.message || 'Server Error'})
+        res.status(error.statusCode || 500).json({success:false,error:error.message || 'Server Error'})
     }catch(error){
-        next(error)
+        next(error) 
     }
 }
 export default errorMiddleware
