@@ -1,4 +1,5 @@
 import { Router } from "express";
+import authRouter from "./auth.routes.js";
 
 const subscriptionRouter= Router()
 
@@ -8,7 +9,7 @@ subscriptionRouter.get('/',(req,res)=>{
 subscriptionRouter.get('/:id',(req,res)=>{
     res.send({title:"GET the subscriptions details"})
 })
-subscriptionRouter.post('/',(req,res)=>{
+subscriptionRouter.post('/',authRouter,(req,res)=>{
     res.send({title:"CREATE subscriptions"})
 })
 subscriptionRouter.put('/:id',(req,res)=>{
