@@ -29,11 +29,21 @@ export const getUserSubscriptions= async (req,res,next)=>{
         next(error)
     }
 }
-export const getAllSubscriptions=async (req,res,next)=>{
+
+export const getAllSubscriptions = async (req, res, next) => {
     try {
-        const subscriptions=await Subscription.find({user:req.user._id})
-        res.status(200).json({success:true,data:subscriptions})
+        // Ensure user is authenticated and req.user is available
+        const userId = req.user._id;
+        console.log("u---------->",userId);
+        
+        const subscriptions = await Subscription.find({ user: userId });
+
+        res.status(200).json({
+            success: true,
+            count: subscriptions.length,
+            data: subscriptions,
+        });
     } catch (error) {
-        next(error)
+        next(error); // Passes error to global error handler
     }
-}
+};
