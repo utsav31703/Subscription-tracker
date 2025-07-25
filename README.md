@@ -1,4 +1,3 @@
-text
 # 📱 SubDub - Subscription Tracker API
 
 A modern, feature-rich subscription tracking API built with Node.js, Express, and MongoDB. Automatically sends beautiful email reminders before subscription renewals using advanced workflow automation.
@@ -32,113 +31,109 @@ A modern, feature-rich subscription tracking API built with Node.js, Express, an
 ### Installation
 
 1. **Clone the repository**
-git clone https://github.com/utsav31703/Subscription-tracker.git
-cd Subscription-tracker
-
-text
+   ```bash
+   git clone https://github.com/utsav31703/Subscription-tracker.git
+   cd Subscription-tracker
+   ```
 
 2. **Install dependencies**
-npm install
-
-text
+   ```bash
+   npm install
+   ```
 
 3. **Environment Setup**
 
-Create a `.env` file in the root directory:
-Server Configuration
-PORT=3000
-NODE_ENV=development
-APP_URL=http://localhost:3000
+   Create a `.env` file in the root directory:
+   ```env
+   # Server Configuration
+   PORT=3000
+   NODE_ENV=development
+   APP_URL=http://localhost:3000
 
-Database
-MONGODB_URI=mongodb://localhost:27017/subscription-tracker
+   # Database
+   MONGODB_URI=mongodb://localhost:27017/subscription-tracker
 
-JWT Authentication
-JWT_SECRET=your-super-secure-jwt-secret-key-here
-JWT_EXPIRES_IN=7d
+   # JWT Authentication
+   JWT_SECRET=your-super-secure-jwt-secret-key-here
+   JWT_EXPIRES_IN=7d
 
-Email Configuration (Gmail Example)
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_SECURE=false
-SMTP_USER=your-email@gmail.com
-SMTP_PASS=your-app-password
-FROM_EMAIL=noreply@subdub.com
-REPLY_TO_EMAIL=support@subdub.com
+   # Email Configuration (Gmail Example)
+   SMTP_HOST=smtp.gmail.com
+   SMTP_PORT=587
+   SMTP_SECURE=false
+   SMTP_USER=your-email@gmail.com
+   SMTP_PASS=your-app-password
+   FROM_EMAIL=noreply@subdub.com
+   REPLY_TO_EMAIL=support@subdub.com
 
-Upstash Workflow (Production)
-QSTASH_URL=https://qstash.upstash.io
-QSTASH_TOKEN=your-qstash-token
+   # Upstash Workflow (Production)
+   QSTASH_URL=https://qstash.upstash.io
+   QSTASH_TOKEN=your-qstash-token
 
-Local Development
-QSTASH_URL_LOCAL=http://127.0.0.1:8080
-QSTASH_TOKEN_LOCAL=eyJVc2VySUQiOiJkZWZhdWx0VXNlciIsIlBhc3N3b3JkIjoiZGVmYXVsdFBhc3N3b3JkIn0=
-
-text
+   # Local Development
+   QSTASH_URL_LOCAL=http://127.0.0.1:8080
+   QSTASH_TOKEN_LOCAL=eyJVc2VySUQiOiJkZWZhdWx0VXNlciIsIlBhc3N3b3JkIjoiZGVmYXVsdFBhc3N3b3JkIn0=
+   ```
 
 4. **Start the application**
-Development mode
-npm run dev
+   ```bash
+   # Development mode
+   npm run dev
 
-Production mode
-npm start
-
-text
+   # Production mode
+   npm start
+   ```
 
 5. **For local workflow testing**
-Install QStash CLI
-npm install -g @upstash/cli
+   ```bash
+   # Install QStash CLI
+   npm install -g @upstash/cli
 
-Start local QStash server
-qstash dev --port 8080
-
-text
+   # Start local QStash server
+   qstash dev --port 8080
+   ```
 
 ## 📚 API Documentation
 
 ### Authentication
 
 All protected endpoints require a JWT token in the Authorization header:
+```
 Authorization: Bearer <your-jwt-token>
-
-text
+```
 
 ### Core Endpoints
 
 #### 🔐 Authentication
-POST /api/auth/register
-POST /api/auth/login
-POST /api/auth/refresh
-
-text
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - User login
+- `POST /api/auth/refresh` - Refresh JWT token
 
 #### 📱 Subscriptions
-GET /api/subscriptions # Get all user subscriptions
-POST /api/subscriptions # Create new subscription
-GET /api/subscriptions/:id # Get specific subscription
-PUT /api/subscriptions/:id # Update subscription
-DELETE /api/subscriptions/:id # Delete subscription
-POST /api/subscriptions/reminders # Trigger reminder workflow
-
-text
+- `GET /api/subscriptions` - Get all user subscriptions
+- `POST /api/subscriptions` - Create new subscription
+- `GET /api/subscriptions/:id` - Get specific subscription
+- `PUT /api/subscriptions/:id` - Update subscription
+- `DELETE /api/subscriptions/:id` - Delete subscription
+- `POST /api/subscriptions/reminders` - Trigger reminder workflow
 
 ### Example Subscription Object
 
+```json
 {
-"name": "Netflix Premium",
-"price": 15.99,
-"currency": "USD",
-"frequency": "monthly",
-"category": "entertainment",
-"paymentMethod": "Credit Card ending in 1234",
-"status": "active",
-"startDate": "2025-01-01T00:00:00.000Z",
-"renewalDate": "2025-02-01T00:00:00.000Z",
-"planName": "Premium Plan",
-"serviceName": "Netflix"
+  "name": "Netflix Premium",
+  "price": 15.99,
+  "currency": "USD",
+  "frequency": "monthly",
+  "category": "entertainment",
+  "paymentMethod": "Credit Card ending in 1234",
+  "status": "active",
+  "startDate": "2025-01-01T00:00:00.000Z",
+  "renewalDate": "2025-02-01T00:00:00.000Z",
+  "planName": "Premium Plan",
+  "serviceName": "Netflix"
 }
-
-text
+```
 
 ## 📧 Email Template System
 
@@ -161,13 +156,16 @@ The system includes 4 beautifully designed email templates:
 
 Built with **Upstash Workflow** for reliable, scalable automation:
 
-// Trigger workflow for a subscription
+```bash
+# Trigger workflow for a subscription
 POST /api/subscriptions/reminders
-{
-"subscriptionId": "subscription-id-here"
-}
+```
 
-text
+```json
+{
+  "subscriptionId": "subscription-id-here"
+}
+```
 
 ### Workflow Features
 - ⏰ **Precise Scheduling** - Sleeps until exact reminder times
@@ -177,51 +175,55 @@ text
 
 ## 🏗️ Project Structure
 
+```
 subscription-tracker/
-├── config/ # Configuration files
-├── controllers/ # Route controllers
-├── database/ # Database connection
-├── middlewares/ # Custom middleware
-├── models/ # MongoDB schemas
-├── routes/ # API routes
-├── utils/ # Utility functions
-│ ├── send.email.js # Email service
-│ └── modernEmailTemplate.js # Email templates
-├── workflows/ # Upstash workflows
-├── app.js # Express app setup
-└── package.json # Dependencies
-
-text
+├── config/                 # Configuration files
+├── controllers/             # Route controllers
+├── database/               # Database connection
+├── middlewares/            # Custom middleware
+├── models/                 # MongoDB schemas
+├── routes/                 # API routes
+├── utils/                  # Utility functions
+│   ├── send.email.js       # Email service
+│   └── modernEmailTemplate.js # Email templates
+├── workflows/              # Upstash workflows
+├── app.js                  # Express app setup
+└── package.json            # Dependencies
+```
 
 ## 🧪 Testing
 
 ### Manual Testing with cURL
 
-Register a new user
-curl -X POST http://localhost:3000/api/auth/register
--H "Content-Type: application/json"
--d '{"name":"Test User","email":"test@example.com","password":"password123"}'
+**Register a new user:**
+```bash
+curl -X POST http://localhost:3000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Test User","email":"test@example.com","password":"password123"}'
+```
 
-Create a subscription
-curl -X POST http://localhost:3000/api/subscriptions
--H "Authorization: Bearer YOUR_JWT_TOKEN"
--H "Content-Type: application/json"
--d '{
-"name": "Netflix",
-"price": 15.99,
-"currency": "USD",
-"frequency": "monthly",
-"category": "entertainment",
-"renewalDate": "2025-08-01T00:00:00.000Z"
-}'
+**Create a subscription:**
+```bash
+curl -X POST http://localhost:3000/api/subscriptions \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Netflix",
+    "price": 15.99,
+    "currency": "USD",
+    "frequency": "monthly",
+    "category": "entertainment",
+    "renewalDate": "2025-08-01T00:00:00.000Z"
+  }'
+```
 
-Trigger reminder workflow
-curl -X POST http://localhost:3000/api/subscriptions/reminders
--H "Authorization: Bearer YOUR_JWT_TOKEN"
--H "Content-Type: application/json"
--d '{"subscriptionId": "SUBSCRIPTION_ID"}'
-
-text
+**Trigger reminder workflow:**
+```bash
+curl -X POST http://localhost:3000/api/subscriptions/reminders \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"subscriptionId": "SUBSCRIPTION_ID"}'
+```
 
 ## 🛠️ Configuration
 
@@ -230,11 +232,11 @@ text
 #### Gmail Setup
 1. Enable 2-Factor Authentication
 2. Generate App Password
-3. Use in SMTP_PASS environment variable
+3. Use in `SMTP_PASS` environment variable
 
 #### Other Providers
-- **SendGrid**: Set SMTP_HOST to `smtp.sendgrid.net`
-- **Mailgun**: Set SMTP_HOST to `smtp.mailgun.org`
+- **SendGrid**: Set `SMTP_HOST` to `smtp.sendgrid.net`
+- **Mailgun**: Set `SMTP_HOST` to `smtp.mailgun.org`
 - **AWS SES**: Configure with your SES credentials
 
 ### Database Options
@@ -245,14 +247,15 @@ text
 ## 🚀 Deployment
 
 ### Using PM2 (Recommended)
+```bash
 npm install -g pm2
 pm2 start app.js --name "subscription-tracker"
 pm2 startup
 pm2 save
-
-text
+```
 
 ### Using Docker
+```dockerfile
 FROM node:18-alpine
 WORKDIR /app
 COPY package*.json ./
@@ -260,18 +263,52 @@ RUN npm ci --only=production
 COPY . .
 EXPOSE 3000
 CMD ["npm", "start"]
-
-text
+```
 
 ### Environment Variables for Production
+```env
 NODE_ENV=production
 APP_URL=https://your-domain.com
 MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/subscription-tracker
+# ... other production configs
+```
 
-... other production configs
-text
+## 📊 Performance & Monitoring
+
+### Recommended Monitoring Tools
+- **PM2 Monitoring** - Built-in process monitoring
+- **MongoDB Compass** - Database monitoring
+- **Upstash Console** - Workflow monitoring
+- **Winston Logging** - Application logging
+
+### Performance Tips
+- Use MongoDB indexes for frequent queries
+- Implement rate limiting for API endpoints
+- Cache frequently accessed data
+- Monitor memory usage and optimize queries
+
+## 🔍 Troubleshooting
+
+### Common Issues
+
+**Email not sending:**
+- Verify SMTP credentials
+- Check firewall settings
+- Ensure app passwords are used for Gmail
+
+**Workflow not triggering:**
+- Verify Upstash credentials
+- Check QStash local server status
+- Review workflow logs
+
+**Database connection issues:**
+- Verify MongoDB URI
+- Check network connectivity
+- Ensure database permissions
 
 ## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
@@ -279,21 +316,47 @@ text
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
+### Development Guidelines
+- Follow ESLint configuration
+- Write tests for new features
+- Update documentation for API changes
+- Use conventional commit messages
+
+## 📋 Roadmap
+
+- [ ] **v2.0**: Web dashboard interface
+- [ ] **v2.1**: Mobile app integration
+- [ ] **v2.2**: Advanced analytics and reporting
+- [ ] **v2.3**: Integration with payment providers
+- [ ] **v2.4**: Team collaboration features
+- [ ] **v2.5**: Custom reminder templates
+
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🔗 Links
 
-- **GitHub**: [https://github.com/utsav31703/Subscription-tracker](https://github.com/utsav31703/Subscription-tracker)
+- **GitHub Repository**: [https://github.com/utsav31703/Subscription-tracker](https://github.com/utsav31703/Subscription-tracker)
 - **Upstash Workflow Docs**: [https://upstash.com/docs/qstash/workflow](https://upstash.com/docs/qstash/workflow)
-- **Nodemailer**: [https://nodemailer.com/](https://nodemailer.com/)
+- **Nodemailer Documentation**: [https://nodemailer.com/](https://nodemailer.com/)
+- **Express.js Guide**: [https://expressjs.com/](https://expressjs.com/)
 
 ## 📞 Support
 
-If you have any questions or need help, please:
-- Open an issue on GitHub
-- Email: support@subdub.com
+If you have any questions or need help:
+
+- 🐛 **Bug Reports**: [Open an issue](https://github.com/utsav31703/Subscription-tracker/issues)
+- 💡 **Feature Requests**: [Start a discussion](https://github.com/utsav31703/Subscription-tracker/discussions)
+- 📧 **Email Support**: support@subdub.com
+- 💬 **Community**: Join our Discord server (coming soon)
+
+## 🙏 Acknowledgments
+
+- Thanks to the Upstash team for their excellent workflow platform
+- MongoDB team for the robust database solution
+- The Node.js and Express.js communities
+- All contributors who help improve this project
 
 ---
 
