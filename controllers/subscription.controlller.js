@@ -1,45 +1,52 @@
+
 import { SERVER_URL } from '../config/env.js'
-import { workflowClient } from '../config/upstash.js'  
+import { workflowClient } from '../config/upstash.js'
 import Subscription from '../models/subscription.models.js'
 
-export const createSubscription=async(req,res,next)=>{
+export const createSubscription = async (req, res, next) => {
     try {
-        const subscription=await Subscription.create({
+        const subscription = await Subscription.create({
             ...req.body,
-            user:req.user._id,
+            user: req.user._id,
         })
 
-     const {workflowRunId}=await workflowClient.trigger({
-            url:`${SERVER_URL}/api/workflows/subscription/reminder`,
-            body:{
-                subscriptionId:subscription.id,
+        const response = await workflowClient.trigger({
+            url: `${SERVER_URL}/api/v1/workflows/subscription/reminder`,
+            body: {
+                subscriptionId: subscription.id,
             },
-            headers:{
-               "content-type": "application/json" 
+            headers: {
+                "content-type": "application/json"
             },
-            retries:0,
-        })
-             if (workflowRunId) {
-      subscription.workflowRunId = workflowRunId;
-      await subscription.save(); // ✅ Save updated subscription
-    }
+            retries: 0,
+        });
+        console.log('Workflow trigger attempted:',response);
+        
+        if(!response.workflowRunId) return  console.log("Workflow trigger response:", response);
+       
+
+        if (response) {
+            subscription.workflowRunId = response.workflowRunId;
+            await subscription.save();
+            // ✅ Save updated subscription
+        }
         res.status(201).json(subscription)
     } catch (error) {
         next(error)
     }
 }
 
-export const getUserSubscriptions= async (req,res,next)=>{
+export const getUserSubscriptions = async (req, res, next) => {
 
     try {
-        if(req.user.id!= req.params.id){
-            const error=new Error('You are not then owner of this account ');
-            error.status=401;
+        if (req.user.id != req.params.id) {
+            const error = new Error('You are not then owner of this account ');
+            error.status = 401;
             throw error;
         }
-        const subscriptions=await Subscription.find({user:req.params.id})
+        const subscriptions = await Subscription.find({ user: req.params.id })
 
-        res.status(200).json({success:true,data:subscriptions})
+        res.status(200).json({ success: true, data: subscriptions })
     } catch (error) {
         next(error)
     }

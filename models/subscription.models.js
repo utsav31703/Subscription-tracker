@@ -61,9 +61,9 @@ const subscriptionSchema = new mongoose.Schema({
         required:true,
         index:true,
     },
-     workflowRunId: {
-        type: String,
-        default: null,
+    workflowRunId: {
+    type: String,
+    default: null,
     }
 }, {
     timestamps: true,
