@@ -105,9 +105,9 @@ Authorization: Bearer <your-jwt-token>
 ### Core Endpoints
 
 #### 🔐 Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - User login
-- `POST /api/auth/refresh` - Refresh JWT token
+- `POST /api/auth/sign-up` - Register new user
+- `POST /api/auth/sign-in` - User login
+
 
 #### 📱 Subscriptions
 - `GET /api/subscriptions` - Get all user subscriptions
