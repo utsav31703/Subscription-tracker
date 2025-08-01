@@ -72,7 +72,7 @@ A modern, feature-rich subscription tracking API built with Node.js, Express, an
 
    # Local Development
    QSTASH_URL_LOCAL=http://127.0.0.1:8080
-   QSTASH_TOKEN_LOCAL=eyJVc2VySUQiOiJkZWZhdWx0VXNlciIsIlBhc3N3b3JkIjoiZGVmYXVsdFBhc3N3b3JkIn0=
+   QSTASH_TOKEN_LOCAL=YOUR_TOKEN
    ```
 
 4. **Start the application**
