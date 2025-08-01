@@ -78,7 +78,7 @@ export const generateEmailTemplate = ({
                             <tr>
                                 <td style="padding: 20px 24px 16px; border-bottom: 1px solid #e2e8f0;">
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span style="font-size: 16px; color: #4a5568; font-weight: 500;">📦 Plan </span>
+                                        <span style="font-size: 16px; color: #4a5568; font-weight: 500;">📦 Plan  </span>
                                         <span style="font-size: 16px; color: #2d3748; font-weight: 600;"> ${planName}</span>
                                     </div>
                                 </td>
@@ -86,7 +86,7 @@ export const generateEmailTemplate = ({
                             <tr>
                                 <td style="padding: 16px 24px; border-bottom: 1px solid #e2e8f0;">
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span style="font-size: 16px; color: #4a5568; font-weight: 500;">💰 Price </span>
+                                        <span style="font-size: 16px; color: #4a5568; font-weight: 500;">💰 Price  </span>
                                         <span style="font-size: 18px; color: #667eea; font-weight: 700;"> ${price}</span>
                                     </div>
                                 </td>
@@ -94,7 +94,7 @@ export const generateEmailTemplate = ({
                             <tr>
                                 <td style="padding: 16px 24px 20px;">
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span style="font-size: 16px; color: #4a5568; font-weight: 500;">💳 Payment </span>
+                                        <span style="font-size: 16px; color: #4a5568; font-weight: 500;">💳 Payment  </span>
                                         <span style="font-size: 16px; color: #2d3748; font-weight: 600;"> ${paymentMethod}</span>
                                     </div>
                                 </td>
