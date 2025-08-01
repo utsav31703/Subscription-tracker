@@ -8,7 +8,7 @@ import errorMiddleware from './middlewares/error.middleware.js';
 import cookieParser from 'cookie-parser';
 import arcjetMiddleware from './middlewares/arcjet.middleware.js';
 import workflowRouter from './routes/workflow.routes.js';
-const cors = require("cors");
+import cors from 'cors'
 
 const app =express()
 
