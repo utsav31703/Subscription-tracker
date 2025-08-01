@@ -105,17 +105,17 @@ Authorization: Bearer <your-jwt-token>
 ### Core Endpoints
 
 #### 🔐 Authentication
-- `POST /api/auth/sign-up` - Register new user
-- `POST /api/auth/sign-in` - User login
+- `POST /api/v1/auth/sign-up` - Register new user
+- `POST /api/v1/auth/sign-in` - User login
 
 
 #### 📱 Subscriptions
-- `GET /api/subscriptions` - Get all user subscriptions
-- `POST /api/subscriptions` - Create new subscription
-- `GET /api/subscriptions/:id` - Get specific subscription
-- `PUT /api/subscriptions/:id` - Update subscription
-- `DELETE /api/subscriptions/:id` - Delete subscription
-- `POST /api/subscriptions/reminders` - Trigger reminder workflow
+- `GET /api/v1/subscriptions` - Get all user subscriptions
+- `POST /api/v1/subscriptions` - Create new subscription
+- `GET /api/v1/subscriptions/:id` - Get specific subscription
+- `PUT /api/v1/subscriptions/:id` - Update subscription
+- `DELETE /api/v1/subscriptions/:id` - Delete subscription
+- `POST /api/v1/subscriptions/reminders` - Trigger reminder workflow
 
 ### Example Subscription Object
 
