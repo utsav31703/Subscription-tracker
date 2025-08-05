@@ -39,7 +39,7 @@ export const createSubscription = async (req, res, next) => {
 export const getUserSubscriptions = async (req, res, next) => {
 
     try {
-        if (req.user.id != req.params.id) {
+        if (req.user.id != req.params) {
             const error = new Error('You are not then owner of this account ');
             error.status = 401;
             throw error;
@@ -71,7 +71,7 @@ export const getAllSubscriptions = async (req, res, next) => {
 // Update subscription by ID
 export const updateSubscription = async (req, res, next) => {
     try {
-        const { id } = req.params;
+        const  id  = req.params.id;
         const updateData = req.body;
 
         // Find subscription and verify ownership
@@ -120,10 +120,14 @@ export const updateSubscription = async (req, res, next) => {
 // Delete subscription by ID
 export const deleteSubscription = async (req, res, next) => {
     try {
-        const { id } = req.params;
-
+        const id = req.params.id;
+        console.log("id isssssssssssss",id);
+        console.log("paramssss ",req.params.id);
+        
+        
         // Find subscription and verify ownership
         const subscription = await Subscription.findById(id);
+        console.log("subscriptions",subscription);
         
         if (!subscription) {
             const error = new Error("Subscription not found");
@@ -132,7 +136,7 @@ export const deleteSubscription = async (req, res, next) => {
         }
 
         // Check if user owns this subscription
-        if (subscription.user.toString() !== req.user._id.toString()) {
+        if (subscription.user.toString() !== req.user.id.toString()) {
             const error = new Error("You are not authorized to delete this subscription");
             error.statusCode = 403;
             throw error;
