@@ -10,7 +10,7 @@ subscriptionRouter.get('/',authorize,getAllSubscriptions,(req,res)=>{
 subscriptionRouter.get('/:id',authorize,getUserSubscriptions)
 subscriptionRouter.post('/',authorize,createSubscription)
 subscriptionRouter.put('/:id',authorize,updateSubscription)
-subscriptionRouter.delete('/:id',authorize,deleteSubscription)
+subscriptionRouter.delete('/:id',deleteSubscription)
 subscriptionRouter.get('/user/:id',authorize,getUserSubscriptions)
 subscriptionRouter.put('/:id/cancel',authorize,cancelSubscription)
 subscriptionRouter.get('/upcoming-renewals',authorize,getUpcomingRenewals)
