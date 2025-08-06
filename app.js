@@ -12,11 +12,7 @@ import cors from 'cors'
 
 const app =express()
 
-app.use(cors(({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000'], // OR '*' to allow all
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true // if you're using cookies or auth headers
-})));
+app.use(cors();
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(cookieParser())
